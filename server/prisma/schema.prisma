@@ -7,50 +7,102 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// Enums
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum MeetingStatus {
+  DRAFT
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum ActionStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+// Models
 model User {
-  id            String         @id @default(cuid())
-  email         String         @unique
-  passwordHash  String         @map("password_hash")
+  id            String   @id @default(uuid()) @db.Uuid
   name          String?
-  createdAt     DateTime       @default(now()) @map("created_at")
-  updatedAt     DateTime       @updatedAt @map("updated_at")
+  email         String   @unique
+  passwordHash  String
+  avatar        String?
+  role          UserRole @default(USER)
+  isVerified    Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
   meetings      Meeting[]
-  refreshTokens RefreshToken[]
 
   @@map("users")
 }
 
-model RefreshToken {
-  id        String   @id @default(cuid())
-  token     String   @unique
-  userId    String   @map("user_id")
-  expiresAt DateTime @map("expires_at")
-  createdAt DateTime @default(now()) @map("created_at")
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("refresh_tokens")
-}
-
 model Meeting {
-  id        String    @id @default(cuid())
-  userId    String    @map("user_id")
-  title     String
-  rawNotes  String    @map("raw_notes") @db.Text
-  createdAt DateTime  @default(now()) @map("created_at")
-  updatedAt DateTime  @updatedAt @map("updated_at")
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  summaries Summary[]
+  id            String        @id @default(uuid()) @db.Uuid
+  userId        String        @db.Uuid
+  title         String
+  description   String?       @db.Text
+  originalNotes String        @db.Text
+  meetingDate   DateTime
+  status        MeetingStatus @default(DRAFT)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  deletedAt     DateTime?     // Soft delete
+  
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  summary       Summary?
+  actionItems   ActionItem[]
 
+  @@index([userId])
+  @@index([meetingDate])
   @@map("meetings")
 }
 
 model Summary {
-  id        String   @id @default(cuid())
-  meetingId String   @map("meeting_id")
-  content   String   @db.Text
-  model     String   @default("gpt-4o-mini")
-  createdAt DateTime @default(now()) @map("created_at")
-  meeting   Meeting  @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+  id              String   @id @default(uuid()) @db.Uuid
+  meetingId       String   @unique @db.Uuid
+  shortSummary    String   @db.Text
+  detailedSummary String   @db.Text
+  bulletSummary   String   @db.Text
+  keyDecisions    Json
+  importantTopics Json
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  meeting         Meeting  @relation(fields: [meetingId], references: [id], onDelete: Cascade)
 
   @@map("summaries")
+}
+
+model ActionItem {
+  id          String       @id @default(uuid()) @db.Uuid
+  meetingId   String       @db.Uuid
+  title       String
+  description String?      @db.Text
+  assignee    String?
+  deadline    DateTime?
+  priority    Priority     @default(MEDIUM)
+  status      ActionStatus @default(PENDING)
+  completedAt DateTime?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  
+  meeting     Meeting      @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+
+  @@index([meetingId])
+  @@index([status])
+  @@map("action_items")
 }
