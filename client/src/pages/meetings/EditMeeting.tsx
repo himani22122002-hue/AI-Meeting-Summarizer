@@ -9,7 +9,6 @@ export const EditMeeting: React.FC = () => {
   const meeting = mockMeetings.find(m => m.id === id);
 
   const handleSubmit = (data: any) => {
-    console.log(data);
     navigate(`/meetings/${id}`);
   };
 

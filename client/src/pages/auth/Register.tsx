@@ -22,7 +22,7 @@ export const Register: React.FC = () => {
     resolver: zodResolver(registerSchema),
   });
 
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (data: any) => {};
 
   return (
     <AuthLayout title="Create Account" subtitle="Get started with your free account">

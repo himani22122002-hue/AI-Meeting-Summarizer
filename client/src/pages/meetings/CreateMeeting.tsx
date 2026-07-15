@@ -6,7 +6,6 @@ export const CreateMeeting: React.FC = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (data: any) => {
-    console.log(data);
     navigate('/meetings');
   };
 

@@ -16,7 +16,7 @@ export const ForgotPassword: React.FC = () => {
   });
 
   const onSubmit = (data: any) => {
-    console.log(data);
+    // TODO: Implement password reset logic
     setIsSubmitted(true);
   };
 

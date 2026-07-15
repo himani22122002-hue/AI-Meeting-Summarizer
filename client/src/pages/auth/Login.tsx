@@ -18,7 +18,7 @@ export const Login: React.FC = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (data: any) => {};
 
   return (
     <AuthLayout title="Login" subtitle="Enter your details to access your account">
