@@ -1,12 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, FileText, Bot, ListTodo, User, Settings } from 'lucide-react';
+import { LayoutDashboard, FileText, Bot, ListTodo, User, Settings, Bell } from 'lucide-react';
 
 const menuItems = [
   { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { path: '/meetings', label: 'Meetings', icon: FileText },
   { path: '/summaries', label: 'AI Summaries', icon: Bot },
   { path: '/action-items', label: 'Action Items', icon: ListTodo },
+  { path: '/notifications', label: 'Notifications', icon: Bell },
   { path: '/profile', label: 'Profile', icon: User },
   { path: '/settings', label: 'Settings', icon: Settings },
 ];

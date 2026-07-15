@@ -42,3 +42,16 @@ export interface Summary {
   processingTime: number; // in seconds
   isFavorite: boolean;
 }
+
+export type NotificationCategory = 'Meeting Scheduled' | 'Meeting Updated' | 'Summary Generated' | 'Task Assigned' | 'Task Completed' | 'System Update';
+export type NotificationPriority = 'high' | 'medium' | 'low';
+
+export interface AppNotification {
+  id: string;
+  category: NotificationCategory;
+  title: string;
+  description: string;
+  time: string;
+  isRead: boolean;
+  priority: NotificationPriority;
+}

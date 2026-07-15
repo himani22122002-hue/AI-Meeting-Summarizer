@@ -1,5 +1,6 @@
 import React from 'react';
 import { Bell, Search, Menu } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface NavbarProps {
   toggleMobileSidebar: () => void;
@@ -27,9 +28,9 @@ export const Navbar: React.FC<NavbarProps> = ({ toggleMobileSidebar }) => {
       </div>
 
       <div className="flex items-center space-x-4">
-        <button className="p-2 text-gray-400 hover:text-indigo-600">
+        <Link to="/notifications" className="p-2 text-gray-400 hover:text-indigo-600">
           <Bell className="w-6 h-6" />
-        </button>
+        </Link>
         <div className="w-8 h-8 rounded-full bg-indigo-100 border border-indigo-200 flex items-center justify-center text-indigo-700 font-semibold">
           JD
         </div>
