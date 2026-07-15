@@ -55,3 +55,22 @@ export interface AppNotification {
   isRead: boolean;
   priority: NotificationPriority;
 }
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  company: string;
+  location: string;
+  memberSince: string;
+  bio: string;
+  avatarUrl: string;
+  skills: { name: string; level: number }[];
+  stats: {
+    meetingsCreated: number;
+    aiSummaries: number;
+    completedTasks: number;
+    productivityScore: number;
+  };
+}

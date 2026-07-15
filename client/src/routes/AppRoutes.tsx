@@ -17,6 +17,8 @@ import { CreateActionItem } from '../pages/action-items/CreateActionItem';
 import { EditActionItem } from '../pages/action-items/EditActionItem';
 import { Analytics } from '../pages/analytics/Analytics';
 import { Notifications } from '../pages/notifications/Notifications';
+import { Profile } from '../pages/profile/Profile';
+import { EditProfile } from '../pages/profile/EditProfile';
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -39,7 +41,8 @@ export const AppRoutes: React.FC = () => {
         <Route path="action-items/:id/edit" element={<EditActionItem />} />
         <Route path="analytics" element={<Analytics />} />
         <Route path="notifications" element={<Notifications />} />
-        <Route path="profile" element={<div>Profile Page</div>} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="profile/edit" element={<EditProfile />} />
         <Route path="settings" element={<div>Settings Page</div>} />
       </Route>
     </Routes>
