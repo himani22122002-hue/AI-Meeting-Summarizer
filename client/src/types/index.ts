@@ -14,10 +14,16 @@ export type MeetingType = 'Daily Standup' | 'Client Meeting' | 'Sprint Review' |
 
 export interface ActionItem {
   id: string;
-  task: string;
+  title: string;
+  description: string;
+  meetingId: string;
+  meetingTitle: string;
   assignee: string;
+  priority: 'critical' | 'high' | 'medium' | 'low';
+  status: 'pending' | 'in-progress' | 'completed' | 'overdue';
   dueDate: string;
-  completed: boolean;
+  createdAt: string;
+  aiConfidence: number;
 }
 
 export interface Summary {

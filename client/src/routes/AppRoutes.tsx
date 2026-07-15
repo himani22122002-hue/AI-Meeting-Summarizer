@@ -11,6 +11,10 @@ import { MeetingDetails } from '../pages/meetings/MeetingDetails';
 import { EditMeeting } from '../pages/meetings/EditMeeting';
 import { Summaries } from '../pages/summaries/Summaries';
 import { SummaryDetails } from '../pages/summaries/SummaryDetails';
+import { ActionItems } from '../pages/action-items/ActionItems';
+import { ActionItemDetails } from '../pages/action-items/ActionItemDetails';
+import { CreateActionItem } from '../pages/action-items/CreateActionItem';
+import { EditActionItem } from '../pages/action-items/EditActionItem';
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -27,7 +31,10 @@ export const AppRoutes: React.FC = () => {
         <Route path="meetings/:id/edit" element={<EditMeeting />} />
         <Route path="summaries" element={<Summaries />} />
         <Route path="summaries/:id" element={<SummaryDetails />} />
-        <Route path="action-items" element={<div>Action Items Page</div>} />
+        <Route path="action-items" element={<ActionItems />} />
+        <Route path="action-items/new" element={<CreateActionItem />} />
+        <Route path="action-items/:id" element={<ActionItemDetails />} />
+        <Route path="action-items/:id/edit" element={<EditActionItem />} />
         <Route path="profile" element={<div>Profile Page</div>} />
         <Route path="settings" element={<div>Settings Page</div>} />
       </Route>
