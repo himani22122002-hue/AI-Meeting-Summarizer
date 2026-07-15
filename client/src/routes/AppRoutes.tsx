@@ -5,6 +5,10 @@ import { Dashboard } from '../pages/dashboard/Dashboard';
 import { Login } from '../pages/auth/Login';
 import { Register } from '../pages/auth/Register';
 import { ForgotPassword } from '../pages/auth/ForgotPassword';
+import { Meetings } from '../pages/meetings/Meetings';
+import { CreateMeeting } from '../pages/meetings/CreateMeeting';
+import { MeetingDetails } from '../pages/meetings/MeetingDetails';
+import { EditMeeting } from '../pages/meetings/EditMeeting';
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -15,7 +19,10 @@ export const AppRoutes: React.FC = () => {
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Navigate to="/dashboard" replace />} />
         <Route path="dashboard" element={<Dashboard />} />
-        <Route path="meetings" element={<div>Meetings Page</div>} />
+        <Route path="meetings" element={<Meetings />} />
+        <Route path="meetings/new" element={<CreateMeeting />} />
+        <Route path="meetings/:id" element={<MeetingDetails />} />
+        <Route path="meetings/:id/edit" element={<EditMeeting />} />
         <Route path="summaries" element={<div>Summaries Page</div>} />
         <Route path="action-items" element={<div>Action Items Page</div>} />
         <Route path="profile" element={<div>Profile Page</div>} />
